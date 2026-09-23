@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/*
+ * Kyawama design tokens.
+ * Colour values come from docs/BRAND.md (observed on the live site, 23 Sep 2026).
+ * Derived tints are marked; everything else is a brand observation.
+ */
+@theme {
+  /* Brand palette */
+  --color-green: #12463a;
+  --color-green-700: #1a5646; /* derived: raised panels on green */
+  --color-green-600: #245f4f; /* derived: hairlines / arcs on green */
+  --color-cream: #faf6ec;
+  --color-cream-200: #f3ecdc; /* derived: alternate light band */
+  --color-cream-300: #e8dfcb; /* derived: borders on cream */
+  --color-terracotta: #b8442c;
+  --color-terracotta-dark: #96331f;
+  --color-terracotta-deco: #d5573b; /* decorative only – not for small text */
+  --color-ink: #201c1a;
+  --color-body: #52504c;
+  --color-sage: #c3d4cd;
+  --color-yellow: #f2b33d;
+  --color-teal: #159a8c; /* illustrative accent – not for small text on cream */
+
+  /* Type families (wired to next/font variables in layout.tsx) */
+  --font-display: var(--font-bricolage), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-figtree), "Segoe UI", system-ui, sans-serif;
+
+  /* Fluid type scale */
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-lead: clamp(1.125rem, 1.02rem + 0.45vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+  --text-body: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem);
+  --text-body--line-height: 1.65;
+  --text-h3: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --text-h3--line-height: 1.2;
+  --text-h2: clamp(2rem, 1.55rem + 2vw, 3.25rem);
+  --text-h2--line-height: 1.04;
+  --text-display: clamp(2.75rem, 1.7rem + 4.9vw, 5.75rem);
+  --text-display--line-height: 0.96;
+  --text-figure: clamp(3.5rem, 2.6rem + 4vw, 6rem);
+  --text-figure--line-height: 0.9;
+
+  /* Layout */
+  --container-site: 76rem; /* ~1216px content width */
+  --radius-panel: 2rem;
+
+  /* Motion (CSS side; mirrors src/lib/motion.ts) */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --header-h: 4.5rem;
+  --gutter: clamp(1.25rem, 0.9rem + 1.6vw, 2.75rem);
+}
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.on-light :focus-visible {
+  outline-color: var(--color-terracotta);
+}
+
+/*
+ * Motion safety net.
+ * `motion-ready` is added by an inline head script only when the visitor has
+ * not asked for reduced motion, and removed again if the app fails to hydrate.
+ * Without it, every animated element is shown in its settled state.
+ */
+html:not(.motion-ready) [data-motion] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html:not(.motion-ready) [data-motion-path] {
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* FAQ disclosure: progressive height transition where supported */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 220ms var(--ease-out-soft),
+    content-visibility 220ms allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}

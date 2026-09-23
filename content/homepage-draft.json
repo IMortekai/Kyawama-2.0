@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "version": "0.1",
+    "preparedOn": "2026-09-23",
+    "status": "EDITORIAL DRAFT — local concept, not publication approval",
+    "instruction": "Map only public copy fields into components. Keep claim IDs and review notes in development documentation.",
+    "language": "en-GB"
+  },
+  "brand": {
+    "shortName": "Kyawama",
+    "publicName": "The Kyawama Foundation",
+    "claimIds": ["F01"],
+    "legalStatusText": null
+  },
+  "navigation": [
+    {"label": "Our story", "href": "#story"},
+    {"label": "Programme", "href": "#programme"},
+    {"label": "Support the pilot", "href": "#support"}
+  ],
+  "hero": {
+    "eyebrow": "Rural Zambia · Digital skills · Remote-work readiness",
+    "heading": "Digital skills. A fairer start.",
+    "body": "Kyawama helps adults in underserved Zambian communities build practical digital skills and prepare for opportunities in remote work.",
+    "primaryCta": {"label": "Support the pilot", "href": "#support"},
+    "secondaryCta": {"label": "Explore the programme", "href": "#programme"},
+    "claimIds": ["F02", "F03", "F08"],
+    "visual": "Approved human-centred photo, or original abstract learning path"
+  },
+  "story": {
+    "id": "story",
+    "eyebrow": "The people behind the programme",
+    "heading": "A personal connection. A practical beginning.",
+    "body": "Steve Carroll's time as a Peace Corps volunteer in Zambia began a lasting connection with a host family and their community. Later, his work with Fanny Mutanda helped shape the idea behind Kyawama: make practical learning and a first professional opportunity more accessible.",
+    "person": {
+      "name": "Fanny Mutanda",
+      "role": "Zambia Program Lead",
+      "body": "Fanny now works as a Junior Campaign Manager at Ruvixx and brings her own experience of learning to work remotely to Kyawama's programme."
+    },
+    "claimIds": ["F10", "F12"],
+    "reviewNote": "Her story predates the pilot. Do not present her as a graduate of a completed Kyawama cohort."
+  },
+  "team": [
+    {"name": "Steve Carroll", "role": "Founder & Board President", "claimIds": ["F09"]},
+    {"name": "Fanny Mutanda", "role": "Zambia Program Lead", "claimIds": ["F10"]},
+    {"name": "Raeesa Cassim", "role": "Strategy & Program Lead", "claimIds": ["F11"]}
+  ],
+  "programme": {
+    "id": "programme",
+    "eyebrow": "Learning that connects to everyday work",
+    "heading": "From digital basics to professional confidence.",
+    "intro": "The planned programme combines classroom teaching, supervised practice and preparation for working with remote teams. Previous computer experience is not required.",
+    "stages": [
+      {"number": "01", "title": "Build digital confidence", "body": "Practise using a computer, managing email and files, creating documents and staying safe online."},
+      {"number": "02", "title": "Practise working professionally", "body": "Develop the communication, teamwork and reliable working habits that remote teams depend on."},
+      {"number": "03", "title": "Prepare for opportunities", "body": "Build a CV, prepare for interviews and learn to identify and apply for credible opportunities."}
+    ],
+    "expectation": "Kyawama supports preparation and the search for opportunities. Completing the course does not guarantee employment.",
+    "claimIds": ["F03", "F06", "F07", "F08", "F14"]
+  },
+  "pilot": {
+    "id": "pilot",
+    "eyebrow": "Planned first cohort · Zambia",
+    "heading": "The first pilot, built around practice.",
+    "facts": [
+      {"value": "15", "label": "learners planned"},
+      {"value": "16", "label": "weeks of learning"},
+      {"value": "8", "label": "scheduled hours each week"}
+    ],
+    "body": "The weekly plan includes three two-hour lessons and a two-hour supervised practice session. The course is free for selected learners.",
+    "scheduleNote": "The current plan is to begin in October 2026. The classroom venue in Zambia is being confirmed.",
+    "claimIds": ["F04", "F05", "F06"],
+    "publicationStatus": "RECONFIRM",
+    "reviewNote": "Reconfirm date, size, schedule, venue and funding dependencies before public release. Values describe plans, not completed impact."
+  },
+  "support": {
+    "id": "support",
+    "eyebrow": "Help make the pilot possible",
+    "heading": "There is more than one way to open a door.",
+    "body": "The pilot needs practical support, from classroom resources to people who can share their experience. Talk to us about the contribution that fits you or your organisation.",
+    "options": [
+      {"title": "Fund the learning", "body": "Discuss support for delivery, materials, learner needs or another agreed part of the pilot."},
+      {"title": "Equip the classroom", "body": "Help with suitable computers, accessories or connectivity. Contact the team before arranging equipment."},
+      {"title": "Offer a place to learn", "body": "Explore whether a suitable classroom with power, connectivity and secure storage could support the programme."},
+      {"title": "Share experience", "body": "Contribute teaching, mentoring or practical insight into working in remote teams."}
+    ],
+    "additional": "You can also discuss credible work opportunities or help connect the team with potential learners in your community.",
+    "primaryCta": {"label": "Talk about supporting the pilot", "href": "mailto:stephen@kyawama.org"},
+    "secondaryCta": {"label": "Programme and volunteering enquiries", "href": "mailto:raeesa@kyawama.org"},
+    "claimIds": ["F16", "F17"]
+  },
+  "faq": [
+    {"question": "Is this an online course?", "answer": "The pilot is planned as an in-person programme in Zambia. Guest teachers may join remotely while learners work together in the classroom.", "claimIds": ["F06"]},
+    {"question": "Do learners need computer experience?", "answer": "No previous computer experience is required. Selection includes an English comprehension assessment because lessons are delivered in English.", "claimIds": ["F07"]},
+    {"question": "Does the course guarantee a job?", "answer": "No. It builds practical skills and professional readiness, with support in identifying and pursuing credible opportunities.", "claimIds": ["F08"]},
+    {"question": "Who should I contact?", "answer": "Contact Steve about funding and partnerships. Contact Raeesa about programme delivery, volunteering and learner recommendations.", "claimIds": ["F17"]}
+  ],
+  "contact": {
+    "id": "contact",
+    "heading": "Start a conversation with Kyawama.",
+    "people": [
+      {"name": "Steve Carroll", "role": "Founder & Board President", "email": "stephen@kyawama.org", "href": "mailto:stephen@kyawama.org"},
+      {"name": "Raeesa Cassim", "role": "Strategy & Program Lead", "email": "raeesa@kyawama.org", "href": "mailto:raeesa@kyawama.org"}
+    ],
+    "claimIds": ["F09", "F11", "F17"]
+  },
+  "optionalModules": {
+    "ace1t": {
+      "enabled": false,
+      "publicCopy": null,
+      "publicationStatus": "HOLD",
+      "claimIds": ["F20", "F21"],
+      "reviewNote": "Await confirmed rollout, public wording and destination. Do not render a learning portal or platform partnership claim."
+    },
+    "impactStatistics": {"enabled": false, "publicCopy": null},
+    "donationCheckout": {"enabled": false},
+    "testimonials": {"enabled": false}
+  }
+}

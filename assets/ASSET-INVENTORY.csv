@@ -1,0 +1,12 @@
+asset_id,asset,source_or_path,status,intended_use,rights_or_approval,next_action
+A01,Original Kyawama logo,assets/brand/kyawama-logo.svg (copied unmodified to public/brand/),Supplied and in use,Header and footer (cream version via CSS mask); favicon uses its K glyph,Supplied by Kris; approved-master status to confirm (Q13),Confirm master and whether a reversed version exists
+A02,Homepage reference screenshot,references/screenshots/current-home-2026-09-23.jpg,Included,Design reference only,Current public-site observation,Do not publish as a production asset
+A03,Fanny portrait or work photo,Not supplied,Missing,Origin and local leadership story,Confirm consent and caption,Request approved original
+A04,Steve portrait,Not supplied,Missing,Later About page,Confirm approved portrait,Request if team photography is desired
+A05,Raeesa portrait,Not supplied,Missing,Later About page,Confirm approved portrait,Request if team photography is desired
+A06,Real classroom or teaching photos,Not supplied,Missing,Hero or programme story,Confirm usage rights and participant consent,Request authentic media; do not imply pilot already happened
+A07,Programme footage,Not supplied,Optional,Later user-initiated video,Confirm rights captions and context,Defer until supplied
+A08,YouTube channel or video URLs,R1 mentions material only,Unresolved,Possible later programme resources,Confirm correct public URLs and permission,No guessed links or embeds
+A09,Ruvixx and Ace1t marks,Not supplied,Conditional,Only approved partner or platform references,Public use and wording require clarification,Do not add a logo strip by default
+A10,Font files,Bricolage Grotesque and Figtree via next/font/google (self-hosted at build),In use,Headings and body,SIL Open Font License (Google Fonts),None
+A11,Abstract learning path,src/components/home/HeroPath.tsx and LearningJourney.tsx,Built,Hero and process visual,Original SVG composition,Review in first visual pass

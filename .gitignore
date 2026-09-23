@@ -1,0 +1,24 @@
+# Merge with existing repository rules; do not replace them blindly.
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+
+# Internal source material stays local unless intentionally handled in a private repo.
+# Ignore rules do not untrack files already committed.
+sources/raw/
+.mcp.json
+
+# Next.js / tooling (merged from create-next-app)
+/out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+*.pem
