@@ -1,40 +1,41 @@
-"use client";
-
-import { motion, type Variants } from "motion/react";
+import type { CSSProperties } from "react";
 import { hero } from "@/content/home";
+import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Container } from "@/components/ui/primitives";
-import { distance, duration, ease } from "@/lib/motion";
+import { Container, CurveEdge } from "@/components/ui/primitives";
+import { delay, heroTimeline as T } from "@/lib/motion";
 import { HeroPath } from "./HeroPath";
 
-const group: Variants = {
-  hidden: {},
-  shown: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: distance.hero },
-  shown: { opacity: 1, y: 0, transition: { duration: duration.hero, ease } },
-};
-
-/** Word in the headline that receives the drawn underline. */
-const EMPHASIS = "fairer";
-
+/**
+ * Hero. Load animation is pure CSS (line masks, fade-ups, drawn path): it
+ * needs no JavaScript and is readable within ~0.7s. Scroll-linked parallax on
+ * the decorative layers is added by Motion after hydration.
+ */
 export function Hero() {
   const [first, second] = hero.headingLines;
-  const [before, after] = second.split(EMPHASIS);
+  const [before, after] = second.split(hero.emphasis);
 
   return (
-    <section
-      aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-green text-cream"
-    >
-      <Container className="relative grid items-center gap-12 pb-24 pt-14 sm:pt-20 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-32 lg:pt-24">
-        <motion.div variants={group} initial="hidden" animate="shown" className="max-w-2xl">
-          <motion.p
-            data-motion=""
-            variants={item}
-            className="flex flex-wrap items-center gap-x-3 gap-y-1 text-eyebrow font-semibold uppercase text-yellow"
+    <section aria-labelledby="hero-heading" className="relative isolate overflow-hidden bg-green text-cream">
+      {/* Concentric arcs echo the existing site's motif; they turn slowly as you scroll */}
+      <ParallaxLayer
+        className="pointer-events-none absolute -right-[22rem] -bottom-[30rem] -z-10 size-[64rem] sm:-right-[14rem]"
+        rotate={[0, 18]}
+        offset={["start start", "end start"]}
+        settled={0}
+      >
+        <svg viewBox="0 0 400 400" className="size-full anim-fade" fill="none" stroke="var(--color-green-600)" strokeWidth="0.8">
+          <circle cx="200" cy="200" r="90" opacity="0.7" />
+          <circle cx="200" cy="200" r="140" opacity="0.5" strokeDasharray="1 6" />
+          <circle cx="200" cy="200" r="190" opacity="0.35" />
+        </svg>
+      </ParallaxLayer>
+
+      <Container className="relative grid items-center gap-10 pb-28 pt-14 sm:pt-20 lg:min-h-[min(54rem,calc(100svh-var(--header-h)))] lg:grid-cols-[1.45fr_1fr] lg:gap-4 lg:pb-36 lg:pt-16">
+        <div className="relative z-10 max-w-[46rem]">
+          <p
+            className="anim-fade-up flex flex-wrap items-center gap-x-3 gap-y-1 text-eyebrow font-semibold uppercase text-yellow"
+            style={delay(T.eyebrow)}
           >
             {hero.eyebrow.map((part, index) => (
               <span key={part} className="flex items-center gap-3">
@@ -42,52 +43,51 @@ export function Hero() {
                 {part}
               </span>
             ))}
-          </motion.p>
+          </p>
 
-          <h1 id="hero-heading" className="mt-6 text-display font-extrabold tracking-[-0.035em]">
-            <motion.span data-motion="" variants={item} className="block">
-              {first}
-            </motion.span>
-            <motion.span data-motion="" variants={item} className="block">
-              {before}
-              <span className="relative inline-block">
-                {EMPHASIS}
-                <Underline />
+          <h1
+            id="hero-heading"
+            className="mt-7 text-[clamp(3rem,1.3rem+4.6vw,5.25rem)] leading-[0.94] font-extrabold tracking-[-0.04em]"
+          >
+            <span className="kw-mask anim-line block! pb-[0.3em]! -mb-[0.3em]!">
+              <span style={delay(T.line)}>{first}</span>
+            </span>
+            <span className="kw-mask anim-line block! pb-[0.34em]! -mb-[0.34em]!">
+              <span style={delay(T.line + T.lineStep)}>
+                {before}
+                <span className="relative inline-block text-yellow">
+                  {hero.emphasis}
+                  <Underline />
+                </span>
+                {after}
               </span>
-              {after}
-            </motion.span>
+            </span>
           </h1>
 
-          <motion.p data-motion="" variants={item} className="mt-7 max-w-[34rem] text-lead text-sage">
+          <p className="anim-fade-up mt-8 max-w-[34rem] text-lead text-sage" style={delay(T.body)}>
             {hero.body}
-          </motion.p>
+          </p>
 
-          <motion.div
-            data-motion=""
-            variants={item}
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
-          >
+          <div className="anim-fade-up mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap" style={delay(T.cta)}>
             <ButtonLink href={hero.primaryCta.href}>{hero.primaryCta.label}</ButtonLink>
             <ButtonLink href={hero.secondaryCta.href} variant="ghostDark">
               {hero.secondaryCta.label}
             </ButtonLink>
-          </motion.div>
-        </motion.div>
-
-        <div className="relative lg:-mr-6">
-          <HeroPath />
+          </div>
         </div>
+
+        <ParallaxLayer
+          className="relative lg:-mr-10 xl:-mr-16"
+          y={[0, -70]}
+          offset={["start start", "end start"]}
+          settled={0}
+          decorative={false}
+        >
+          <HeroPath />
+        </ParallaxLayer>
       </Container>
 
-      {/* Soft arc into the cream story section */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 1440 64"
-        preserveAspectRatio="none"
-        className="absolute inset-x-0 bottom-0 h-8 w-full text-cream sm:h-12 lg:h-16"
-      >
-        <path d="M0 64V40C360 6 1080 6 1440 40v24z" fill="currentColor" />
-      </svg>
+      <CurveEdge position="bottom" fill="cream" />
     </section>
   );
 }
@@ -98,19 +98,17 @@ function Underline() {
       aria-hidden="true"
       viewBox="0 0 200 20"
       preserveAspectRatio="none"
-      className="pointer-events-none absolute -bottom-[0.12em] left-[-2%] h-[0.28em] w-[104%] overflow-visible"
+      className="pointer-events-none absolute -bottom-[0.14em] left-[-2%] h-[0.26em] w-[104%] overflow-visible"
       fill="none"
     >
-      <motion.path
-        data-motion-path=""
+      <path
         d="M3 14C45 6 120 3 197 9"
+        pathLength={1}
+        className="anim-draw"
+        style={{ ...delay(T.line + T.lineStep + 520), "--dur": "650ms" } as CSSProperties}
         stroke="var(--color-terracotta-deco)"
         strokeWidth="7"
         strokeLinecap="round"
-        vectorEffect="non-scaling-stroke"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 0.6, ease, delay: 0.55 }}
       />
     </svg>
   );

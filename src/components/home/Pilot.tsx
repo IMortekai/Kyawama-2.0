@@ -1,115 +1,66 @@
 import { pilot } from "@/content/home";
-import { pilotPlan } from "@/content/programme";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { Container, Eyebrow, Heading, Section, cx } from "@/components/ui/primitives";
+import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
+import { Reveal } from "@/components/motion/Reveal";
+import { CalendarGlyph, PilotFigures, PlannedBadge, PlannedWeek } from "@/components/pilot/PilotPlan";
+import { Container, CurveEdge, Section, SectionIntro } from "@/components/ui/primitives";
+import { seq } from "@/lib/motion";
 
-/**
- * Planned pilot. Figures are plans (F04–F06, reconfirm before publication):
- * they render statically — no counting animation that would read as impact.
- */
+/** Planned pilot — full-bleed green band between the light sections. */
 export function Pilot() {
-  const week = [
-    ...Array.from({ length: pilotPlan.lessonsPerWeek }, (_, i) => ({
-      key: `lesson-${i}`,
-      label: pilot.lessonLabel,
-      hours: pilotPlan.lessonHours,
-      practice: false,
-    })),
-    { key: "practice", label: pilot.practiceLabel, hours: pilotPlan.practiceHours, practice: true },
-  ];
-
   return (
-    <Section id={pilot.id} labelledBy="pilot-heading" className="py-10! sm:py-14! lg:py-20!">
-      <Container>
-        <Reveal>
-          <div className="relative overflow-hidden rounded-(--radius-panel) bg-green px-6 py-12 text-cream sm:px-10 sm:py-16 lg:px-16 lg:py-20">
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 400 400"
-              className="pointer-events-none absolute -right-40 -top-40 size-[36rem] sm:-right-24"
-              fill="none"
-              stroke="var(--color-green-600)"
-              strokeWidth="1.5"
-            >
-              <circle cx="200" cy="200" r="100" />
-              <circle cx="200" cy="200" r="150" opacity="0.7" />
-              <circle cx="200" cy="200" r="198" opacity="0.45" />
-            </svg>
+    <Section
+      id={pilot.id}
+      tone="green"
+      aria-labelledby="pilot-heading"
+      className="overflow-hidden pb-[calc(var(--section-y)+3rem)] pt-[calc(var(--section-y)+3rem)]"
+    >
+      <CurveEdge position="top" fill="sand" />
+      <ParallaxLayer
+        className="pointer-events-none absolute -right-[26rem] top-10 size-[44rem] sm:-right-40"
+        rotate={[-12, 12]}
+        scale={[0.92, 1.08]}
+      >
+        <svg viewBox="0 0 400 400" fill="none" stroke="var(--color-green-600)" strokeWidth="1.2" className="size-full">
+          <circle cx="200" cy="200" r="100" />
+          <circle cx="200" cy="200" r="150" opacity="0.7" strokeDasharray="2 7" />
+          <circle cx="200" cy="200" r="198" opacity="0.45" />
+          <circle cx="200" cy="100" r="7" fill="var(--color-yellow)" stroke="none" />
+          <circle cx="350" cy="200" r="5" fill="var(--color-teal)" stroke="none" />
+        </svg>
+      </ParallaxLayer>
 
-            <div className="relative">
-              <div className="flex flex-wrap items-center gap-3">
-                <Eyebrow tone="dark">{pilot.eyebrow}</Eyebrow>
-                <span className="rounded-full border border-yellow/60 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-yellow">
-                  {pilot.status}
-                </span>
-              </div>
-              <Heading id="pilot-heading" className="mt-4 max-w-[15ch] text-cream">
-                {pilot.heading}
-              </Heading>
-
-              <RevealGroup as="ul" className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-0 lg:mt-16">
-                {pilot.facts.map((fact, index) => (
-                  <RevealItem
-                    as="li"
-                    key={fact.label}
-                    className={cx(
-                      "border-t border-green-600 pt-5 sm:border-t-0 sm:pt-0 sm:pr-6",
-                      index > 0 && "sm:border-l sm:pl-8 lg:pl-12",
-                    )}
-                  >
-                    <p className="font-display text-figure font-extrabold tracking-[-0.04em] text-cream">
-                      {fact.value}
-                    </p>
-                    <p className="mt-3 max-w-[14ch] text-lead font-medium text-sage">{fact.label}</p>
-                  </RevealItem>
-                ))}
-              </RevealGroup>
-
-              <div className="mt-14 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
-                <div className="lg:col-span-7">
-                  <p className="text-eyebrow font-semibold uppercase text-sage">{pilot.weekLabel}</p>
-                  <RevealGroup as="ol" className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    {week.map((slot) => (
-                      <RevealItem
-                        as="li"
-                        key={slot.key}
-                        className={cx(
-                          "flex min-h-24 flex-col justify-between rounded-2xl p-4",
-                          slot.practice
-                            ? "bg-yellow text-green"
-                            : "bg-green-700 text-cream ring-1 ring-green-600",
-                        )}
-                      >
-                        <span className="text-sm font-semibold leading-tight">{slot.label}</span>
-                        <span className="font-display text-2xl font-bold">
-                          {slot.hours}
-                          <span className="ml-1 text-sm font-semibold">hours</span>
-                        </span>
-                      </RevealItem>
-                    ))}
-                  </RevealGroup>
-                </div>
-                <div className="space-y-5 lg:col-span-5 lg:pt-9">
-                  <p className="text-sage">{pilot.body}</p>
-                  <p className="flex gap-3 rounded-2xl bg-green-700 p-4 text-cream ring-1 ring-green-600">
-                    <CalendarGlyph />
-                    <span>{pilot.scheduleNote}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <Container className="relative">
+        <Reveal variant="fade">
+          <PlannedBadge />
         </Reveal>
-      </Container>
-    </Section>
-  );
-}
+        <SectionIntro
+          className="mt-4"
+          eyebrow={pilot.eyebrow}
+          heading={pilot.heading}
+          headingId="pilot-heading"
+          tone="dark"
+          layout="stack"
+          accent={["practice."]}
+        />
 
-function CalendarGlyph() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className="mt-1 size-5 shrink-0 text-yellow" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-      <rect x="2.5" y="4" width="15" height="13" rx="2" />
-      <path d="M2.5 8.5h15M6.5 2v4M13.5 2v4" />
-    </svg>
+        <PilotFigures className="mt-16 lg:mt-20" />
+
+        <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-12">
+          <PlannedWeek className="lg:col-span-7" />
+          <div className="space-y-5 lg:col-span-5 lg:pt-9">
+            <Reveal delay={seq.body}>
+              <p className="text-sage">{pilot.body}</p>
+            </Reveal>
+            <Reveal delay={seq.cta}>
+              <p className="flex gap-3 rounded-2xl bg-green-700 p-5 text-cream ring-1 ring-green-600">
+                <CalendarGlyph />
+                <span>{pilot.scheduleNote}</span>
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </Container>
+      <CurveEdge position="bottom" fill="cream" />
+    </Section>
   );
 }

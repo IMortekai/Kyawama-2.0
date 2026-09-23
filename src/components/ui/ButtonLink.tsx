@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "./primitives";
 
@@ -28,6 +29,7 @@ export function ButtonLink({
   variant = "primary",
   size = "lg",
   arrow = true,
+  current = false,
   className,
 }: {
   href: string;
@@ -35,11 +37,16 @@ export function ButtonLink({
   variant?: ButtonVariant;
   size?: keyof typeof sizes;
   arrow?: boolean;
+  /** Marks the link as the current page (aria-current). */
+  current?: boolean;
   className?: string;
 }) {
+  // Internal routes use client-side navigation; anchors and mailto stay <a>.
+  const Tag = href.startsWith("/") ? Link : "a";
   return (
-    <a
+    <Tag
       href={href}
+      aria-current={current ? "page" : undefined}
       className={cx(
         "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold transition-colors duration-150 ease-out-soft",
         variants[variant],
@@ -49,7 +56,7 @@ export function ButtonLink({
     >
       <span>{children}</span>
       {arrow && <Arrow />}
-    </a>
+    </Tag>
   );
 }
 

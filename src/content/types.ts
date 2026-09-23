@@ -8,10 +8,11 @@ export type Contact = {
   role: string;
   email: string;
   topic: string;
+  detail: string;
 };
 
-export type SectionIntro = {
+export type Faq = {
   id: string;
-  eyebrow: string;
-  heading: string;
+  question: string;
+  answer: string;
 };
