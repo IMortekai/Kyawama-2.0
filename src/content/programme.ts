@@ -72,6 +72,7 @@ export const programmePage = {
     eyebrow: "Our programme",
     heading: "Patient teaching, in a real classroom.",
     lead: "Sixteen weeks combining basic digital literacy with professional preparation for remote work — designed for adults who may be using a laptop for the first time.",
+    cta: "What learners cover",
   },
   audience: {
     eyebrow: "Who it is for",
@@ -111,6 +112,7 @@ export const programmePage = {
     heading: "Honest preparation and a stronger chance to compete.",
     body: "Kyawama helps learners identify credible opportunities, understand how to apply and prepare professionally. Completing the course does not guarantee employment.",
   },
+  links: { support: "Support the pilot", faq: "Read the FAQ" },
   referral: {
     eyebrow: "Recommend a learner",
     heading: "Many of the people this is for will never see this website.",

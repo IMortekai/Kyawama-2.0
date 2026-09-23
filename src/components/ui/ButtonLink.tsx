@@ -8,6 +8,8 @@ const variants = {
     "bg-terracotta text-cream hover:bg-terracotta-dark shadow-[0_1px_0_rgb(0_0_0/0.08)]",
   /** Outline on green surfaces. */
   ghostDark: "border border-cream/35 text-cream hover:border-cream hover:bg-cream/10",
+  /** Solid cream on coloured panels. */
+  light: "bg-cream text-terracotta hover:bg-yellow hover:text-green",
   /** Outline on cream surfaces. */
   ghostLight: "border border-green/30 text-green hover:border-green hover:bg-green hover:text-cream",
 } as const;
@@ -20,8 +22,8 @@ const sizes = {
 export type ButtonVariant = keyof typeof variants;
 
 /**
- * Link styled as a button. All site actions are real navigation
- * (anchors or mailto), so this is always an <a>.
+ * Link styled as a button. Every site action is real navigation: internal
+ * routes use next/link; anchors and mailto links stay plain <a>.
  */
 export function ButtonLink({
   href,

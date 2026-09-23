@@ -82,6 +82,8 @@ export const supportPage = {
     eyebrow: "Support the pilot",
     heading: "Help make the first cohort possible.",
     lead: "The curriculum, local leadership and remote-work mentors are in place. There is no donate button here — supporting a first cohort starts with a conversation.",
+    cta: "Start the conversation",
+    secondaryCta: "Ways to help",
   },
   routes: {
     eyebrow: "Where support goes",
@@ -89,6 +91,7 @@ export const supportPage = {
   },
   funding: {
     eyebrow: "What funding could cover",
+    heading: "A single named area, or the whole pilot.",
     body: "The exact use is agreed with you before a contribution is accepted. You may support one named area rather than the whole pilot.",
   },
   why: {
@@ -106,6 +109,7 @@ export const supportPage = {
       { title: "Acknowledgement", body: "How you are recognised, while protecting learner privacy and dignity." },
     ],
   },
+  links: { faq: "Questions funders ask", programme: "How the programme runs" },
   contact: {
     eyebrow: "Get in touch",
     heading: "Write to the team directly.",

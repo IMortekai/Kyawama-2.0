@@ -28,7 +28,7 @@ export function PageHero({
   return (
     <section aria-labelledby="page-heading" className="relative isolate overflow-hidden bg-green text-cream">
       <ParallaxLayer
-        className="pointer-events-none absolute -right-48 -top-16 -z-10 size-[40rem] sm:-right-24 lg:right-0"
+        className="pointer-events-none absolute -bottom-72 -right-64 -z-10 size-[34rem] opacity-80 sm:-bottom-56 sm:-right-40 lg:-bottom-40 lg:-right-16 lg:size-[38rem] lg:opacity-100"
         y={[0, -80]}
         rotate={[0, 10]}
         offset={["start start", "end start"]}
@@ -50,7 +50,7 @@ export function PageHero({
         <h1
           id="page-heading"
           aria-label={heading}
-          className="mt-7 max-w-[14ch] text-display font-extrabold tracking-[-0.04em]"
+          className="mt-7 max-w-[15ch] text-[clamp(2.75rem,1.5rem+4.4vw,5.5rem)] leading-[0.96] font-extrabold tracking-[-0.04em] lg:max-w-[13ch]"
         >
           {words.map((word, index) => (
             <span key={`${word}-${index}`} aria-hidden="true">
