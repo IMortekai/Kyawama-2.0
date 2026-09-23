@@ -5,7 +5,7 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { brand } from "@/content/site";
-import { motionBootScript } from "@/lib/motion-boot";
+import { revealScript } from "@/lib/reveal-script";
 import "./globals.css";
 
 // Brand fonts observed on the live site (docs/BRAND.md). Both are SIL OFL
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
+        <script dangerouslySetInnerHTML={{ __html: revealScript }} />
       </head>
       <body className="flex min-h-screen flex-col">
         <MotionProvider>

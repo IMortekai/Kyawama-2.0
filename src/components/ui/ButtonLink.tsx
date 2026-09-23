@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "./primitives";
 
@@ -7,6 +8,8 @@ const variants = {
     "bg-terracotta text-cream hover:bg-terracotta-dark shadow-[0_1px_0_rgb(0_0_0/0.08)]",
   /** Outline on green surfaces. */
   ghostDark: "border border-cream/35 text-cream hover:border-cream hover:bg-cream/10",
+  /** Solid cream on coloured panels. */
+  light: "bg-cream text-terracotta hover:bg-yellow hover:text-green",
   /** Outline on cream surfaces. */
   ghostLight: "border border-green/30 text-green hover:border-green hover:bg-green hover:text-cream",
 } as const;
@@ -19,8 +22,8 @@ const sizes = {
 export type ButtonVariant = keyof typeof variants;
 
 /**
- * Link styled as a button. All site actions are real navigation
- * (anchors or mailto), so this is always an <a>.
+ * Link styled as a button. Every site action is real navigation: internal
+ * routes use next/link; anchors and mailto links stay plain <a>.
  */
 export function ButtonLink({
   href,
@@ -28,6 +31,7 @@ export function ButtonLink({
   variant = "primary",
   size = "lg",
   arrow = true,
+  current = false,
   className,
 }: {
   href: string;
@@ -35,11 +39,16 @@ export function ButtonLink({
   variant?: ButtonVariant;
   size?: keyof typeof sizes;
   arrow?: boolean;
+  /** Marks the link as the current page (aria-current). */
+  current?: boolean;
   className?: string;
 }) {
+  // Internal routes use client-side navigation; anchors and mailto stay <a>.
+  const Tag = href.startsWith("/") ? Link : "a";
   return (
-    <a
+    <Tag
       href={href}
+      aria-current={current ? "page" : undefined}
       className={cx(
         "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold transition-colors duration-150 ease-out-soft",
         variants[variant],
@@ -49,7 +58,7 @@ export function ButtonLink({
     >
       <span>{children}</span>
       {arrow && <Arrow />}
-    </a>
+    </Tag>
   );
 }
 

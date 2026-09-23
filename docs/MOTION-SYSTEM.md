@@ -26,3 +26,18 @@ Scrolljacking, wheel interception, mandatory pinned storytelling, forced horizon
 
 ## Review
 Observe actual behaviour on a narrow screen and with reduced motion enabled. If an effect competes with reading, simplify it. Motion quality is judged by pacing and purpose, not the number of animated elements.
+
+
+## Implementation (23 Sep 2026, feat/motion-and-pages)
+The approved second pass made motion more visible. How it is built:
+
+| Layer | Mechanism | Used for | Failure / reduced motion |
+|---|---|---|---|
+| Load animation | Pure CSS keyframes (`.anim-line`, `.anim-fade-up`, `.anim-draw`, `.anim-pop`) | Hero line reveals, page-hero word reveals, drawn path motifs | Needs no JS; always ends visible. Off under reduced motion |
+| Scroll reveal | `[data-reveal]` + inline `<head>` observer (`src/lib/reveal-script.ts`) | Section entrances: `up`, `fade`, `scale`, `wipe`, `words` | Hidden only after the observer exists. No JS, script error or reduced motion → nothing hidden. Independent of the React bundle; **no timeout** |
+| Scroll-linked | Motion for React via `useScrollLinked` | Learning-journey route (draw, travelling marker, stage activation), parallax motifs, statement highlight, chapter/commitment rails | Server HTML and reduced motion render the settled (finished) state; decoration only |
+| UI | Motion for React / CSS transitions | Mobile menu, nav indicator, hover, FAQ disclosure | `MotionConfig reducedMotion="user"`; global CSS duration clamp |
+
+Sequencing inside a section follows `seq` in `src/lib/motion.ts`: heading → supporting text (220 ms) → visual (320 ms) → items (380 ms + 90 ms steps) → CTA (560 ms). Headings reveal word by word (45 ms apart) with the plain text as their accessible name. Paragraphs reveal as whole blocks. There are no letter-by-letter effects. The hero headline is readable by about 0.7 s.
+
+Still excluded: scroll hijacking, pinned storytelling, count-up figures (pilot numbers reveal like text), autoplay video and continuous loops (the hero pulse runs three times).

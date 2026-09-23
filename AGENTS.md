@@ -18,6 +18,9 @@ Build the Kyawama homepage concept specified in `docs/`. Kris leads the website 
 ## Done for the first pass
 The homepage works on desktop and mobile; content and interactions follow the brief; assets and unresolved facts are documented; available build/lint checks pass or failures are explained; screenshots and a concise handoff are ready for Kris. Stop at this useful review point, unless Kris has already requested further implementation.
 
+## Current approval (23 September 2026, second pass)
+Kris approved refining the homepage and building About, Programme, Support and FAQ on `feat/motion-and-pages`. This supersedes the stop-after-homepage rule above. Payment processing, accounts and Ace1t integration remain out of scope. Do not merge or deploy without an explicit instruction.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

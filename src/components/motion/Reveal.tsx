@@ -1,87 +1,96 @@
-"use client";
+import type { ComponentPropsWithoutRef, CSSProperties, ElementType, ReactNode } from "react";
+import { delay as delayStyle } from "@/lib/motion";
 
-import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
-import { distance, duration, ease, stagger, viewportOnce } from "@/lib/motion";
+/**
+ * Scroll-reveal primitives. Server components: they only emit attributes
+ * that the inline observer (src/lib/reveal-script.ts) and CSS act upon, so
+ * content is visible whenever that script is absent or reduced motion is on.
+ */
 
-type RevealProps = {
-  children: ReactNode;
-  className?: string;
+export type RevealVariant = "up" | "fade" | "scale" | "wipe";
+
+type RevealProps<T extends ElementType> = {
+  as?: T;
+  variant?: RevealVariant;
+  /** Delay in ms — use the `seq` tokens for ordering inside a section. */
   delay?: number;
-  as?: "div" | "li" | "section" | "p";
-};
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className" | "style" | "children">;
 
-const tags = {
-  div: motion.div,
-  li: motion.li,
-  section: motion.section,
-  p: motion.p,
-};
-
-/** Subtle once-only entry for a single block of content. */
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const Tag = tags[as];
+export function Reveal<T extends ElementType = "div">({
+  as,
+  variant = "up",
+  delay = 0,
+  className,
+  style,
+  children,
+  ...rest
+}: RevealProps<T>) {
+  const Tag = (as ?? "div") as ElementType;
   return (
     <Tag
-      data-motion=""
+      data-reveal={variant}
+      // The observer adds `data-in` before hydration; that is expected.
+      suppressHydrationWarning
       className={className}
-      initial={{ opacity: 0, y: distance.section }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce}
-      transition={{ duration: duration.section, ease, delay }}
+      style={{ ...delayStyle(delay), ...style }}
+      {...rest}
     >
       {children}
     </Tag>
   );
 }
 
-const groupVariants: Variants = {
-  hidden: {},
-  shown: { transition: { staggerChildren: stagger } },
-};
-
-export const revealItem: Variants = {
-  hidden: { opacity: 0, y: distance.section },
-  shown: { opacity: 1, y: 0, transition: { duration: duration.section, ease } },
-};
-
-/** Staggers direct `RevealItem` children once the group enters view. */
-export function RevealGroup({
-  children,
-  className,
-  as = "div",
-}: {
-  children: ReactNode;
+type WordsProps<T extends ElementType> = {
+  as?: T;
+  text: string;
+  delay?: number;
   className?: string;
-  as?: "div" | "ul" | "ol";
-}) {
-  const Tag = as === "ul" ? motion.ul : as === "ol" ? motion.ol : motion.div;
+  /** Words (exact match, punctuation included) to render with `accentClassName`. */
+  accent?: string[];
+  accentClassName?: string;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className" | "children">;
+
+/**
+ * Heading whose words rise into place in sequence (45 ms apart).
+ * The accessible name is the plain text; the split spans are hidden from
+ * assistive technology so screen readers never read word fragments.
+ */
+export function RevealWords<T extends ElementType = "h2">({
+  as,
+  text,
+  delay = 0,
+  className,
+  accent = [],
+  accentClassName = "text-terracotta",
+  ...rest
+}: WordsProps<T>) {
+  const Tag = (as ?? "h2") as ElementType;
+  const words = text.split(" ");
   return (
     <Tag
+      data-reveal="words"
+      suppressHydrationWarning
+      aria-label={text}
       className={className}
-      variants={groupVariants}
-      initial="hidden"
-      whileInView="shown"
-      viewport={viewportOnce}
+      style={delayStyle(delay)}
+      {...rest}
     >
-      {children}
-    </Tag>
-  );
-}
-
-export function RevealItem({
-  children,
-  className,
-  as = "div",
-}: {
-  children: ReactNode;
-  className?: string;
-  as?: "div" | "li";
-}) {
-  const Tag = as === "li" ? motion.li : motion.div;
-  return (
-    <Tag data-motion="" className={className} variants={revealItem}>
-      {children}
+      {words.map((word, index) => (
+        <span key={`${word}-${index}`} aria-hidden="true">
+          <span className="kw-mask">
+            <span
+              className={accent.includes(word) ? accentClassName : undefined}
+              style={{ "--wi": index } as CSSProperties}
+            >
+              {word}
+            </span>
+          </span>
+          {index < words.length - 1 ? " " : null}
+        </span>
+      ))}
     </Tag>
   );
 }
