@@ -22,3 +22,6 @@ sources/raw/
 *.tsbuildinfo
 next-env.d.ts
 *.pem
+
+# Local review recordings (large; regenerate as needed)
+references/**/*.webm

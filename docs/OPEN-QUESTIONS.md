@@ -25,9 +25,18 @@ Prepared 23 September 2026. None of these prevents a useful local homepage conce
 ## Raised during the first build (23 Sep 2026)
 | ID | Question | Owner | Default until answered |
 |---|---|---|---|
-| Q13 | Is the supplied `assets/brand/kyawama-logo.svg` the approved master? Is there a light/reversed version for green backgrounds? | Steve / Kris | Original file used as-is on cream; on green the same file is used as a CSS mask so it renders in cream, with the artwork untouched |
+| Q13 | Can a cream (reversed) logo export be supplied for dark backgrounds? | Kris | Kris confirmed on 23 Sep that the supplied SVG is the working asset for this demo (not an approved master). No cream export exists in the repo, so a CSS mask of the same file renders it in cream |
 | Q14 | Are the small added labels acceptable (see SESSION-HANDOFF "Small copy additions")? | Kris | Keep them; edit in `src/content/` |
 | Q15 | Where will the repo live and who hosts it? The folder is not yet under git | Kris | Local only; nothing deployed |
+
+## Raised during the motion-and-pages pass (23 Sep 2026)
+| ID | Question | Owner | Default until answered |
+|---|---|---|---|
+| Q16 | On /programme, the live site's "What learners cover" topics are grouped under the three journey stages. Is that grouping acceptable? | Raeesa | Shown with an explicit note that it is a grouping, not a week-by-week syllabus |
+| Q17 | Copy carried over from the live site needs confirming before launch: the "growing board, facilitators, advisers and guest teachers" line (About), "soon-to-be-established US nonprofit" (FAQ, F18), the plan to "explore adapting it for other African countries" (Support), and the due-diligence documents offer | Steve | Kept as currently published. The legal answer is flagged in code |
+| Q18 | The live site says there is no sponsor yet (F15). The redesign asks "Is there already a lead sponsor?" and refers people to Steve, without stating the status | Steve | Neutral wording until the status is confirmed |
+| Q19 | `KYAWAMA_BOOSTER_KNOWLEDGE_RAW.md` (internal capture) is committed at the repository root in the baseline commit on `origin/main`. `sources/raw/` is ignored, but this copy is not | Kris | Not removed, and history not rewritten. Decide whether to delete it and, if the remote is shared, whether to purge it from history |
+| Q20 | The live home view's context statistics (36% online, 230M jobs) remain omitted pending source checks (F25) | Kris / Steve | Omitted; the statement band uses only the qualitative line |
 
 ## Resolve before technical expansion or launch
 - Hosting and domain owner; existing repo and deployment process; preview audience.
@@ -43,6 +52,8 @@ Prepared 23 September 2026. None of these prevents a useful local homepage conce
 | 2026-09-23 | Ace1t | Keep public module off until rollout and wording are clarified | R1 caveats; editorial default | Internal context |
 | 2026-09-23 | Scope of first build | Refresh the existing site, preserving brand, purpose and factual content. Steve's additional requirements are still pending (Q02 open). No learner accounts, donation checkout or Ace1t integration | Kris, build instruction | Draft only |
 | 2026-09-23 | Stack | Next.js 16 + TypeScript + Tailwind CSS 4 + Motion for React | Kris, build instruction | n/a |
+| 2026-09-23 | Second pass | Refine homepage motion/composition and build About, Programme, Support, FAQ on `feat/motion-and-pages`; supersedes stop-after-homepage | Kris, build instruction | Draft only |
+| 2026-09-23 | Logo status | Supplied SVG is the working asset for the demo, not an approved master; use cream export when available | Kris | Draft only |
 | 2026-09-23 | Logo | Original SVG supplied in `assets/brand/`; replaces the provisional text fallback (resolves the logo part of Q09 pending Q13) | Kris, supplied asset | Draft only |
 
 Append actual answers here and update SOURCE-OF-TRUTH.md plus dependent content. Do not replace unknowns with assumptions merely to finish a page.

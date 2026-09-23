@@ -1,5 +1,5 @@
 asset_id,asset,source_or_path,status,intended_use,rights_or_approval,next_action
-A01,Original Kyawama logo,assets/brand/kyawama-logo.svg (copied unmodified to public/brand/),Supplied and in use,Header and footer (cream version via CSS mask); favicon uses its K glyph,Supplied by Kris; approved-master status to confirm (Q13),Confirm master and whether a reversed version exists
+A01,Kyawama logo (working asset),assets/brand/kyawama-logo.svg (copied unmodified to public/brand/),In use for demo,Header (180px desktop / 158px mobile) and footer; favicon uses its K glyph,Supplied by Kris as the working asset for this demo; not described as an approved master,Supply a cream export for dark backgrounds (currently CSS mask of the same file)
 A02,Homepage reference screenshot,references/screenshots/current-home-2026-09-23.jpg,Included,Design reference only,Current public-site observation,Do not publish as a production asset
 A03,Fanny portrait or work photo,Not supplied,Missing,Origin and local leadership story,Confirm consent and caption,Request approved original
 A04,Steve portrait,Not supplied,Missing,Later About page,Confirm approved portrait,Request if team photography is desired

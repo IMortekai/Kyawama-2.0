@@ -11,4 +11,4 @@ Load the remaining docs when their topic is needed. Use `content/homepage-draft.
 
 First inspect the existing project, instructions, git status, framework and assets. Retain compatible code. If no app exists, scaffold a small maintainable site using a suitable supported stack and document the choice. Begin the homepage without waiting on non-blocking content questions.
 
-Keep unresolved decisions in `docs/OPEN-QUESTIONS.md`. Update `docs/SESSION-HANDOFF.md` when a session ends. Show the first homepage at desktop and mobile sizes for review before extending the full site.
+Keep unresolved decisions in `docs/OPEN-QUESTIONS.md`. Update `docs/SESSION-HANDOFF.md` when a session ends. Show the first homepage at desktop and mobile sizes for review before extending the full site. (Done — the homepage review is complete and the full site was approved on 23 Sep 2026; see `docs/SESSION-HANDOFF.md`.)

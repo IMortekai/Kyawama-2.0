@@ -2,7 +2,10 @@
 
 Current site has five views: Home, About, Program, Support and FAQ. Browser navigation between inspected views left the address at the same root URL. The redesign should give later pages real, shareable routes.
 
-## First pass: complete homepage only
+## Status (23 Sep 2026)
+All five routes below are built on `feat/motion-and-pages`: `/`, `/about`, `/programme`, `/support`, `/faq`, plus a branded 404. Header: About, Programme, FAQ and the Support the pilot action. Footer: all routes. Homepage sections keep their anchors (`#story`, `#programme`, `#pilot`, `#support`) and link through to the matching pages.
+
+## First pass (superseded): complete homepage only
 Use real section anchors: `#story`, `#programme`, `#pilot`, `#support`, `#contact`. Header: Our story, Programme, Support the pilot. Support the pilot goes to `#support`; Email Steve opens `mailto:stephen@kyawama.org`. Programme/referral enquiries go to `mailto:raeesa@kyawama.org`.
 
 No menu item should point at an unbuilt page. Footer navigation also uses the existing homepage anchors for this pass. The compact homepage FAQ can sit within the support area.

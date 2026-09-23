@@ -28,7 +28,7 @@ export function PageHero({
   return (
     <section aria-labelledby="page-heading" className="relative isolate overflow-hidden bg-green text-cream">
       <ParallaxLayer
-        className="pointer-events-none absolute -bottom-72 -right-64 -z-10 size-[34rem] opacity-80 sm:-bottom-56 sm:-right-40 lg:-bottom-40 lg:-right-16 lg:size-[38rem] lg:opacity-100"
+        className="pointer-events-none absolute -bottom-72 -right-64 -z-10 size-[34rem] opacity-80 sm:-bottom-56 sm:-right-40 lg:bottom-6 lg:right-0 lg:size-[32rem] lg:opacity-100 xl:right-[4%]"
         y={[0, -80]}
         rotate={[0, 10]}
         offset={["start start", "end start"]}
